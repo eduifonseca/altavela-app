@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "versao": "2026-07-18",
+    "descricao": "Dados de promoções e CPM — atualizar este arquivo para atualizar o app",
+    "proxima_atualizacao": "diária"
+  },
+  "cambio": {
+    "usd": 5.15,
+    "cad": 3.71,
+    "aud": 3.32,
+    "iof": 0.0438
+  },
+  "cpm_base": {
+    "livelo_clube": 29.4,
+    "livelo_sem_clube": 42.0,
+    "esfera_clube": 33.6,
+    "esfera_sem_clube": 42.0,
+    "_nota": "CPM em R$/mil pontos em promoções recorrentes"
+  },
+  "paridades": {
+    "esfera_fb_clube": 3.0,
+    "esfera_fb_sem_clube": 3.5,
+    "livelo_fb_clube": 3.5,
+    "livelo_fb_sem_clube": 3.5,
+    "esfera_avios": 2.0,
+    "livelo_avios": 2.0,
+    "_nota": "Pontos necessários para gerar 1 milha no programa destino"
+  },
+  "bonus_ativos": {
+    "livelo_smiles": 0,
+    "livelo_latam": 0,
+    "livelo_azul": 0,
+    "esfera_smiles": 80,
+    "esfera_azul": 0,
+    "esfera_latam": 0,
+    "atmos_bonus": 0,
+    "aa_desconto": 30,
+    "_nota": "Percentual de bônus ativo agora — 0 = sem promo"
+  },
+  "promos": [
+    {
+      "id": "esfera_smiles_80",
+      "programa": "Esfera→Smiles",
+      "descricao": "80% bônus na transferência",
+      "valor": "80%",
+      "cpm_efetivo": 18.67,
+      "expira": "18/07/2026",
+      "expira_hora": "23h59",
+      "urgencia": "alta",
+      "cor": "grn",
+      "emoji": "🔥",
+      "acao": "Cadastrar na promo ANTES de transferir em smiles.com.br",
+      "fonte": "passageirodeprimeira.com"
+    },
+    {
+      "id": "esfera_connectmiles_55",
+      "programa": "Esfera→ConnectMiles",
+      "descricao": "55% bônus Copa Airlines",
+      "valor": "55%",
+      "cpm_efetivo": null,
+      "expira": "20/07/2026",
+      "expira_hora": "23h59",
+      "urgencia": "media",
+      "cor": "grn",
+      "emoji": "✅",
+      "acao": "esfera.com.vc → Transferir → ConnectMiles",
+      "fonte": "pontospravoar.com"
+    },
+    {
+      "id": "livelo_hilton_50",
+      "programa": "Livelo→Hilton Honors",
+      "descricao": "50% bônus — paridade 2:1 (irrelevante para aéreo)",
+      "valor": "50%",
+      "cpm_efetivo": null,
+      "expira": "31/07/2026",
+      "expira_hora": null,
+      "urgencia": "baixa",
+      "cor": "txt2",
+      "emoji": "🏨",
+      "acao": "livelo.com.br → Transferir → Hilton",
+      "fonte": "passageirodeprimeira.com"
+    },
+    {
+      "id": "fb_promo_rewards",
+      "programa": "Flying Blue Promo Rewards",
+      "descricao": "25% off — apenas EUA→Europa (JFK Business 45k). GRU→Europa SEM desconto",
+      "valor": "25%",
+      "cpm_efetivo": null,
+      "expira": "31/07/2026",
+      "expira_hora": null,
+      "urgencia": "media",
+      "cor": "amb",
+      "emoji": "⚠️",
+      "acao": "flyingblue.com → buscar em executiva JFK→Europa",
+      "fonte": "onemileatatime.com"
+    }
+  ],
+  "encerraram": [
+    {
+      "programa": "Smiles compra direta 375%",
+      "encerrou": "17/07 às 21h"
+    },
+    {
+      "programa": "Esfera→Azul bônus",
+      "encerrou": "17/07 às 23h59"
+    },
+    {
+      "programa": "Livelo→LATAM 25%",
+      "encerrou": "30/06"
+    },
+    {
+      "programa": "Smiles 70% transferência",
+      "encerrou": "10/07"
+    }
+  ],
+  "data_verificacao": "18/07/2026",
+  "hora_verificacao": "18h00"
+}

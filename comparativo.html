@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparativo de Emissões — 3 Passageiros Executiva</title>
+<style>
+  :root {
+    --nv:#0a0f1e;--nv2:#111827;--nv3:#1a2235;
+    --gd:linear-gradient(135deg,#b8960c,#f0c832,#b8960c);
+    --gold:#c9a227;--gold2:#f0c832;
+    --txt:#e8e8e8;--txt2:#a0a8b8;--txt3:#606878;
+    --grn:#22c55e;--red:#ef4444;--blu:#3b82f6;--amb:#d97706;
+    --gl:rgba(201,162,39,.08);--gls:rgba(201,162,39,.15);
+    --best:#1a2e0a;--bests:#22c55e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--nv);color:var(--txt);font-family:'Inter',system-ui,sans-serif;font-size:13px;padding:20px}
+  h1{font-family:'Playfair Display',Georgia,serif;font-size:22px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+  .sub{color:var(--txt3);font-size:11px;margin-bottom:24px}
+  .legend{display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+  .leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--txt2)}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .section{margin-bottom:32px}
+  .section-title{font-size:14px;font-weight:700;color:var(--gold2);margin-bottom:12px;padding:8px 12px;background:var(--gl);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;display:flex;align-items:center;gap:8px}
+  .section-title .flag{font-size:18px}
+
+  table{width:100%;border-collapse:collapse;margin-bottom:8px}
+  th{background:var(--nv3);color:var(--txt2);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:8px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+  th.num,td.num{text-align:right}
+  td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+  tr:hover td{background:rgba(255,255,255,.02)}
+
+  .prog{font-weight:600;color:var(--txt);font-size:12px}
+  .cia{color:var(--txt3);font-size:10px;margin-top:2px}
+  .fonte{font-size:10px;color:var(--txt3)}
+  .fonte span{color:var(--txt2)}
+
+  .pts{font-weight:700;color:var(--txt);font-size:12px}
+  .pts-detail{font-size:10px;color:var(--txt3);margin-top:2px}
+
+  .custo{font-weight:700;font-size:13px}
+  .custo-sub{font-size:10px;color:var(--txt3);margin-top:2px}
+
+  .badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .b-best{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3)}
+  .b-ok{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+  .b-warn{background:rgba(217,119,6,.12);color:#fbbf24;border:1px solid rgba(217,119,6,.25)}
+  .b-bad{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+
+  tr.best-row td{background:rgba(34,197,94,.06);border-bottom:1px solid rgba(34,197,94,.15)}
+
+  .note{background:var(--nv3);border:1px solid rgba(201,162,39,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--txt2);line-height:1.7;margin-bottom:12px}
+  .note strong{color:var(--gold2)}
+
+  .warn-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:#fca5a5;line-height:1.7;margin-bottom:16px}
+
+  .section-sub{color:var(--txt3);font-size:10px;margin-bottom:12px;margin-top:-6px}
+
+  .cpm-pill{display:inline-block;padding:1px 6px;border-radius:4px;font-size:9px;font-weight:600;background:rgba(255,255,255,.06);color:var(--txt2);margin-left:4px}
+
+  .totais{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:8px}
+  .tot-card{background:var(--nv3);border:1px solid rgba(201,162,39,.15);border-radius:8px;padding:10px 12px}
+  .tot-label{font-size:9px;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+  .tot-val{font-size:16px;font-weight:700;color:var(--gold2)}
+  .tot-sub{font-size:10px;color:var(--txt3);margin-top:2px}
+
+  .divider{height:1px;background:rgba(255,255,255,.06);margin:20px 0}
+
+  @media(max-width:600px){
+    body{padding:12px}
+    table{font-size:11px}
+    th,td{padding:6px 8px}
+  }
+</style>
+</head>
+<body>
+<div style="background:#0a0f1e;border-bottom:1px solid rgba(255,255,255,.08);padding:8px 16px;display:flex;gap:8px;font-size:11px;font-family:-apple-system,system-ui,sans-serif;position:sticky;top:0;z-index:999">
+<a href="index.html" style="color:#c9a227;text-decoration:none;font-weight:700">APP</a>
+<span style="color:#606878">·</span>
+<a href="calc-pontos.html" style="color:#a0a8b8;text-decoration:none">Custo de Pontos</a>
+<span style="color:#606878">·</span>
+<a href="calc-emissao.html" style="color:#a0a8b8;text-decoration:none">Emissão</a>
+<span style="color:#606878">·</span>
+<a href="comparativo.html" style="color:#a0a8b8;text-decoration:none" style="color:#f0c832;font-weight:700">Comparativo</a>
+</div>
+
+<h1>Comparativo de Emissões em Executiva</h1>
+<div class="sub">3 passageiros · Compra direta de pontos (sem MR orgânico) · Baixa temporada · jul/2026</div>
+
+<div class="legend">
+  <div class="leg"><div class="dot" style="background:#22c55e"></div>Melhor custo</div>
+  <div class="leg"><div class="dot" style="background:#60a5fa"></div>Boa alternativa</div>
+  <div class="leg"><div class="dot" style="background:#fbbf24"></div>Aceitar se necessário</div>
+  <div class="leg"><div class="dot" style="background:#f87171"></div>Evitar</div>
+</div>
+
+<div class="note">
+  <strong>Base de cálculo:</strong> Livelo Clube = R$29,40/mil · Esfera Clube = R$33,60/mil · Aeroplan compra direta promo 100% bônus = CAD 18,75/mil = R$65,81/mil (×1,0438 IOF) · Câmbio USD 5,15 · CAD 3,71<br>
+  <strong>Paridades:</strong> Esfera→Avios 2:1 · Livelo→Avios 2:1 · Esfera→Flying Blue 3:1 · Livelo→Flying Blue 3,5:1<br>
+  <strong>Todos os valores são para ida + volta, 3 passageiros</strong>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ EUROPA ═══ -->
+<div class="section">
+  <div class="section-title"><span class="flag">🇪🇺</span> EUROPA — GRU → Destino europeu</div>
+  <div class="section-sub">Companhias: Iberia (GRU→MAD direto) · British Airways (GRU→LHR direto) · Air France (GRU→CDG direto) · Qatar QSuites (GRU→DOH→Europa, 4 trechos)</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Programa / Companhia</th>
+        <th>Rota operada</th>
+        <th class="num">Milhas/pax/trecho</th>
+        <th class="num">Trechos</th>
+        <th class="num">Total milhas (3 pax)</th>
+        <th>Fonte / Como comprar</th>
+        <th class="num">Pontos a comprar</th>
+        <th class="num">CPM efetivo</th>
+        <th class="num">CUSTO TOTAL (3 pax)</th>
+        <th>Avaliação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="best-row">
+        <td><div class="prog">Iberia Plus (Avios)</div><div class="cia">via Esfera → Iberia 2:1</div></td>
+        <td><div class="fonte"><span>Iberia</span> GRU→MAD direto</div></td>
+        <td class="num pts">40.500</td>
+        <td class="num">2</td>
+        <td class="num pts">243.000 Avios</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>486.000 pts Esfera × 2:1</div></td>
+        <td class="num">486.000</td>
+        <td class="num"><span style="color:var(--gold2)">R$67,20/mil Avios</span></td>
+        <td class="num custo" style="color:var(--grn)">R$ 16.330</td>
+        <td><span class="badge b-best">✦ melhor</span></td>
+      </tr>
+      <tr class="best-row">
+        <td><div class="prog">Iberia Plus (Avios)</div><div class="cia">via Livelo → Iberia 2:1</div></td>
+        <td><div class="fonte"><span>Iberia</span> GRU→MAD direto</div></td>
+        <td class="num pts">40.500</td>
+        <td class="num">2</td>
+        <td class="num pts">243.000 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>486.000 pts Livelo × 2:1</div></td>
+        <td class="num">486.000</td>
+        <td class="num"><span style="color:var(--gold2)">R$58,80/mil Avios</span></td>
+        <td class="num custo" style="color:var(--grn)">R$ 14.288</td>
+        <td><span class="badge b-best">✦ mais barato</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Iberia Plus — alta temporada</div><div class="cia">via Livelo → Iberia 2:1</div></td>
+        <td><div class="fonte"><span>Iberia</span> GRU→MAD direto</div></td>
+        <td class="num pts">59.000</td>
+        <td class="num">2</td>
+        <td class="num pts">354.000 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>708.000 pts Livelo × 2:1</div></td>
+        <td class="num">708.000</td>
+        <td class="num">R$58,80/mil Avios</td>
+        <td class="num custo">R$ 20.815</td>
+        <td><span class="badge b-ok">ok</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">British Airways Club (Avios)</div><div class="cia">via Livelo → BA 2:1</div></td>
+        <td><div class="fonte"><span>British Airways</span> GRU→LHR direto</div></td>
+        <td class="num pts">110.000</td>
+        <td class="num">2</td>
+        <td class="num pts">660.000 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>1.320.000 pts Livelo × 2:1</div></td>
+        <td class="num">1.320.000</td>
+        <td class="num">R$58,80/mil Avios</td>
+        <td class="num custo" style="color:var(--amb)">R$ 38.808</td>
+        <td><span class="badge b-warn">caro</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">British Airways Club (Avios)</div><div class="cia">via Esfera → BA 2:1</div></td>
+        <td><div class="fonte"><span>British Airways</span> GRU→LHR direto</div></td>
+        <td class="num pts">110.000</td>
+        <td class="num">2</td>
+        <td class="num pts">660.000 Avios</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>1.320.000 pts Esfera × 2:1</div></td>
+        <td class="num">1.320.000</td>
+        <td class="num">R$67,20/mil Avios</td>
+        <td class="num custo" style="color:var(--amb)">R$ 44.352</td>
+        <td><span class="badge b-warn">caro</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Flying Blue (Air France)</div><div class="cia">via Esfera → FB 3:1</div></td>
+        <td><div class="fonte"><span>Air France</span> GRU→CDG direto</div></td>
+        <td class="num pts">63.750</td>
+        <td class="num">2</td>
+        <td class="num pts">382.500 milhas FB</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>1.147.500 pts Esfera × 3:1</div></td>
+        <td class="num">1.147.500</td>
+        <td class="num">R$100,80/mil FB</td>
+        <td class="num custo" style="color:var(--red)">R$ 38.556</td>
+        <td><span class="badge b-bad">evitar</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Flying Blue — Promo Rewards 25% off</div><div class="cia">via Esfera → FB 3:1</div></td>
+        <td><div class="fonte"><span>Air France</span> GRU→CDG direto</div></td>
+        <td class="num pts">47.813</td>
+        <td class="num">2</td>
+        <td class="num pts">286.875 milhas FB</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>860.625 pts Esfera × 3:1</div></td>
+        <td class="num">860.625</td>
+        <td class="num">R$100,80/mil FB</td>
+        <td class="num custo" style="color:var(--amb)">R$ 28.917</td>
+        <td><span class="badge b-warn">com promo</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Qatar QSuites via Avios</div><div class="cia">via Livelo → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→Europa (4 trechos)</div></td>
+        <td class="num pts">70k+43k</td>
+        <td class="num">4</td>
+        <td class="num pts">718.000 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>1.436.000 pts Livelo × 2:1</div></td>
+        <td class="num">1.436.000</td>
+        <td class="num">R$58,80/mil Avios</td>
+        <td class="num custo" style="color:var(--red)">R$ 42.218</td>
+        <td><span class="badge b-bad">evitar compra</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>⚠️ British Airways GRU→LHR:</strong> 110.000 Avios/pax/trecho em baixa temporada. A BA cobra taxas de combustível elevadas (YQ) em voos próprios, o que adiciona centenas de dólares por passageiro. Não há vantagem sobre a Iberia no mesmo ecossistema de Avios. <strong>Usar Avios para voar com Iberia via GRU→MAD é sempre mais barato que via BA GRU→LHR.</strong><br>
+    <strong>Flying Blue via Esfera/Livelo:</strong> paridade desfavorável (3:1 e 3,5:1) torna o custo proibitivo vs Iberia. Flying Blue só faz sentido com MR orgânico (transferência 1:1).
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ EUA/CANADA ═══ -->
+<div class="section">
+  <div class="section-title"><span class="flag">🇺🇸🇨🇦</span> ESTADOS UNIDOS / CANADÁ — GRU → EUA/Canadá</div>
+  <div class="section-sub">Destinos: Nova York (JFK/EWR), Miami (MIA), Los Angeles (LAX), Toronto (YYZ)</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Programa / Companhia</th>
+        <th>Rota / Companhia operadora</th>
+        <th class="num">Milhas/pax/trecho</th>
+        <th class="num">Trechos</th>
+        <th class="num">Total milhas (3 pax)</th>
+        <th>Fonte / Como comprar</th>
+        <th class="num">Pontos a comprar</th>
+        <th class="num">CPM efetivo</th>
+        <th class="num">CUSTO TOTAL (3 pax)</th>
+        <th>Avaliação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="best-row">
+        <td><div class="prog">Qatar PC (Avios) — LATAM</div><div class="cia">via Livelo → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>LATAM</span> GRU→JFK/MIA (tabela fixa)</div></td>
+        <td class="num pts">77.250</td>
+        <td class="num">2</td>
+        <td class="num pts">463.500 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>927.000 pts Livelo × 2:1</div></td>
+        <td class="num">927.000</td>
+        <td class="num" style="color:var(--gold2)">R$58,80/mil Avios</td>
+        <td class="num custo" style="color:var(--grn)">R$ 27.254</td>
+        <td><span class="badge b-best">✦ melhor</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Qatar PC (Avios) — LATAM</div><div class="cia">via Esfera → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>LATAM</span> GRU→JFK/MIA</div></td>
+        <td class="num pts">77.250</td>
+        <td class="num">2</td>
+        <td class="num pts">463.500 Avios</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>927.000 pts Esfera × 2:1</div></td>
+        <td class="num">927.000</td>
+        <td class="num">R$67,20/mil Avios</td>
+        <td class="num custo">R$ 31.147</td>
+        <td><span class="badge b-ok">ok</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Aeroplan — Compra direta</div><div class="cia">Air Canada GRU→YYZ / United GRU→EWR/ORD</div></td>
+        <td><div class="fonte"><span>Air Canada / United</span> GRU→Canadá/EUA</div></td>
+        <td class="num pts">60.000</td>
+        <td class="num">2</td>
+        <td class="num pts">360.000 pts</td>
+        <td><div class="fonte">Compra Aeroplan direta (100% bônus promo)<br>R$65,81/mil (CAD 18,75 × 3,71 × 1,0438)</div></td>
+        <td class="num">360.000</td>
+        <td class="num">R$65,81/mil</td>
+        <td class="num custo">R$ 23.692</td>
+        <td><span class="badge b-ok">depende promo</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Iberia Plus (Avios) — AA</div><div class="cia">via Livelo → Iberia 2:1</div></td>
+        <td><div class="fonte"><span>American Airlines</span> GRU→MIA/JFK</div></td>
+        <td class="num pts">57.500</td>
+        <td class="num">2</td>
+        <td class="num pts">345.000 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>690.000 pts Livelo × 2:1</div></td>
+        <td class="num">690.000</td>
+        <td class="num">R$58,80/mil Avios</td>
+        <td class="num custo">R$ 20.286</td>
+        <td><span class="badge b-ok">boa alternativa</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Qatar QSuites GRU→EUA</div><div class="cia">via Livelo → Qatar PC 2:1 (4 trechos)</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→JFK (4 trechos)</div></td>
+        <td class="num pts">70k+77.250</td>
+        <td class="num">4</td>
+        <td class="num pts">885.750 Avios</td>
+        <td><div class="fonte">Compra pontos Livelo (R$29,40/mil)<br>1.771.500 pts Livelo × 2:1</div></td>
+        <td class="num">1.771.500</td>
+        <td class="num">R$58,80/mil Avios</td>
+        <td class="num custo" style="color:var(--red)">R$ 52.062</td>
+        <td><span class="badge b-bad">evitar compra</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Aeroplan:</strong> sem parceiro bancário brasileiro. Acesso apenas por compra direta no site air canada. Promoção de 100% bônus ocorre 3-5x/ano (CPM CAD 18,75 = R$65,81). Sem promo: CPM CAD 35 = R$122/mil — inviável.<br>
+    <strong>Iberia Plus via AA GRU→EUA:</strong> AAdvantage tem tabela fixa GRU→EUA em ~57.500/pax Executiva. Via Iberia Plus com Avios comprados via Livelo, essa é uma rota válida e mais barata que o Qatar PC para LATAM.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ MALDIVAS ═══ -->
+<div class="section">
+  <div class="section-title"><span class="flag">🌊</span> ÁSIA — MALDIVAS (GRU → MLE)</div>
+  <div class="section-sub">Rotas via Dubai (Emirates), Doha (Qatar), Abu Dhabi (Etihad), Istambul (Turkish)</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Programa / Companhia</th>
+        <th>Rota / Escala</th>
+        <th class="num">Milhas/pax/trecho</th>
+        <th class="num">Trechos</th>
+        <th class="num">Total milhas (3 pax)</th>
+        <th>Fonte / Como comprar</th>
+        <th class="num">Pontos a comprar</th>
+        <th class="num">CPM efetivo</th>
+        <th class="num">CUSTO TOTAL (3 pax)</th>
+        <th>Avaliação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="best-row">
+        <td><div class="prog">Qatar PC (Avios) — Qatar Airways</div><div class="cia">via Livelo → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→MLE (baixa)</div></td>
+        <td class="num pts">70k + 15k</td>
+        <td class="num">4</td>
+        <td class="num pts">510.000 Avios</td>
+        <td><div class="fonte">70k (GRU→DOH) + 15k (DOH→MLE) por trecho<br>1.020.000 pts Livelo × 2:1</div></td>
+        <td class="num">1.020.000</td>
+        <td class="num" style="color:var(--gold2)">R$58,80/mil Avios</td>
+        <td class="num custo" style="color:var(--grn)">R$ 29.988</td>
+        <td><span class="badge b-best">✦ melhor</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Qatar PC (Avios) — Qatar Airways</div><div class="cia">via Esfera → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→MLE</div></td>
+        <td class="num pts">70k + 15k</td>
+        <td class="num">4</td>
+        <td class="num pts">510.000 Avios</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>1.020.000 pts Esfera × 2:1</div></td>
+        <td class="num">1.020.000</td>
+        <td class="num">R$67,20/mil Avios</td>
+        <td class="num custo">R$ 34.272</td>
+        <td><span class="badge b-ok">ok</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Smiles — Emirates</div><div class="cia">via Livelo → Smiles 1:1</div></td>
+        <td><div class="fonte"><span>Emirates</span> GRU→DXB→MLE</div></td>
+        <td class="num pts">~120.000</td>
+        <td class="num">4</td>
+        <td class="num pts">~720.000 Smiles</td>
+        <td><div class="fonte">Compra Livelo (R$29,40/mil) → Smiles 1:1<br>Alta disponibilidade, sem taxa combustível</div></td>
+        <td class="num">720.000</td>
+        <td class="num">R$29,40/mil Smiles</td>
+        <td class="num custo" style="color:var(--amb)">R$ 21.168</td>
+        <td><span class="badge b-ok">verificar disponib.</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">AAdvantage — Qatar</div><div class="cia">via compra direta AAdvantage</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→MLE</div></td>
+        <td class="num pts">90.000</td>
+        <td class="num">2</td>
+        <td class="num pts">540.000 AA miles</td>
+        <td><div class="fonte">Compra direta AAdvantage em promo 30% off<br>aa.com: R$141/mil × sem 2:1 deságio</div></td>
+        <td class="num">540.000</td>
+        <td class="num">R$141/mil</td>
+        <td class="num custo" style="color:var(--red)">R$ 76.140</td>
+        <td><span class="badge b-bad">evitar compra</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>⚠️ Maldivas — trecho DOH→MLE:</strong> Qatar cobra ~15.000 Avios em executiva nesse curto trecho. Total GRU→MLE em executiva Qatar = 70k (GRU→DOH) + 15k (DOH→MLE) = 85.000 Avios por trecho/pax, confirmado.<br>
+    <strong>Smiles + Emirates:</strong> se encontrar disponibilidade, o custo via Livelo→Smiles 1:1 a R$29,40/mil é mais barato. Emirates A380 tem suítes/cabines premium premium. Custo aproximado baseado em tabela Smiles GRU→MLE (~120k/pax).<br>
+    <strong>AAdvantage compra direta:</strong> muito caro. Usar AAdvantage apenas se acumulado via cartão Santander AAdvantage, não via compra.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ JAPÃO ═══ -->
+<div class="section">
+  <div class="section-title"><span class="flag">🇯🇵</span> ÁSIA — JAPÃO (GRU → NRT/HND)</div>
+  <div class="section-sub">Rotas via Doha (Qatar), Los Angeles/Chicago (AA + JAL), Istambul (Turkish)</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Programa / Companhia</th>
+        <th>Rota / Escala</th>
+        <th class="num">Milhas/pax/trecho</th>
+        <th class="num">Trechos</th>
+        <th class="num">Total milhas (3 pax)</th>
+        <th>Fonte / Como comprar</th>
+        <th class="num">Pontos a comprar</th>
+        <th class="num">CPM efetivo</th>
+        <th class="num">CUSTO TOTAL (3 pax)</th>
+        <th>Avaliação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="best-row">
+        <td><div class="prog">Qatar PC (Avios) — Qatar Airways</div><div class="cia">via Livelo → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→NRT (baixa)</div></td>
+        <td class="num pts">70k + 30k</td>
+        <td class="num">4</td>
+        <td class="num pts">600.000 Avios</td>
+        <td><div class="fonte">70k (GRU→DOH) + 30k (DOH→NRT)<br>1.200.000 pts Livelo × 2:1</div></td>
+        <td class="num">1.200.000</td>
+        <td class="num" style="color:var(--gold2)">R$58,80/mil Avios</td>
+        <td class="num custo" style="color:var(--grn)">R$ 35.280</td>
+        <td><span class="badge b-best">✦ melhor</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Qatar PC (Avios) — Qatar Airways</div><div class="cia">via Esfera → Qatar PC 2:1</div></td>
+        <td><div class="fonte"><span>Qatar Airways</span> GRU→DOH→NRT</div></td>
+        <td class="num pts">70k + 30k</td>
+        <td class="num">4</td>
+        <td class="num pts">600.000 Avios</td>
+        <td><div class="fonte">Compra pontos Esfera (R$33,60/mil)<br>1.200.000 pts Esfera × 2:1</div></td>
+        <td class="num">1.200.000</td>
+        <td class="num">R$67,20/mil Avios</td>
+        <td class="num custo">R$ 40.320</td>
+        <td><span class="badge b-ok">ok</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Aeroplan — Lufthansa/ANA</div><div class="cia">Compra direta Aeroplan (promo 100%)</div></td>
+        <td><div class="fonte"><span>Lufthansa / ANA</span> GRU→FRA→NRT</div></td>
+        <td class="num pts">80.000</td>
+        <td class="num">2</td>
+        <td class="num pts">480.000 pts</td>
+        <td><div class="fonte">GRU→FRA (Lufthansa) = 80k Aeroplan<br>Compra direta R$65,81/mil (100% bônus)</div></td>
+        <td class="num">480.000</td>
+        <td class="num">R$65,81/mil</td>
+        <td class="num custo">R$ 31.589</td>
+        <td><span class="badge b-ok">depende promo</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">AAdvantage — JAL Business</div><div class="cia">via compra direta AAdvantage</div></td>
+        <td><div class="fonte"><span>JAL</span> GRU→LAX/ORD→NRT via AA+JAL</div></td>
+        <td class="num pts">57.5k+60k</td>
+        <td class="num">4</td>
+        <td class="num pts">352.500+360k=712.500</td>
+        <td><div class="fonte">Compra AA (30% off) R$141/mil<br>Tabela fixa Brasil→EUA (57.5k) + EUA→Ásia (60k)</div></td>
+        <td class="num">712.500</td>
+        <td class="num">R$141/mil</td>
+        <td class="num custo" style="color:var(--red)">R$ 100.463</td>
+        <td><span class="badge b-bad">evitar compra</span></td>
+      </tr>
+      <tr>
+        <td><div class="prog">Smiles — Turkish Airlines</div><div class="cia">via Livelo → Smiles 1:1</div></td>
+        <td><div class="fonte"><span>Turkish Airlines</span> GRU→IST→NRT</div></td>
+        <td class="num pts">~130.000</td>
+        <td class="num">4</td>
+        <td class="num pts">~780.000 Smiles</td>
+        <td><div class="fonte">Compra Livelo (R$29,40/mil) → Smiles 1:1<br>Turkish cobra taxa combustível elevada</div></td>
+        <td class="num">780.000</td>
+        <td class="num">R$29,40/mil Smiles</td>
+        <td class="num custo" style="color:var(--amb)">R$ 22.932 <small>+YQ</small></td>
+        <td><span class="badge b-warn">+taxa combustível</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Qatar GRU→NRT:</strong> 100.000 Avios/pax confirmado para Brasil→Japão. Dividido: ~70k (GRU→DOH) + ~30k (DOH→NRT). Em baixa temporada.<br>
+    <strong>Aeroplan + Lufthansa:</strong> GRU→FRA em Executiva da Lufthansa = 80.000 pontos Aeroplan (tabela parceiras). Só viável com promo 100% bônus (CPM ~R$66/mil). Rotas GRU→FRA→NRT ou GRU→FRA→HND com Lufthansa/ANA são excelentes em qualidade.<br>
+    <strong>Smiles + Turkish:</strong> Turkish cobra YQ (taxa de combustível) que pode adicionar R$1.000-2.500 por pax. Incluir no custo total real.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- RESUMO EXECUTIVO -->
+<div class="section">
+  <div class="section-title">📊 RESUMO EXECUTIVO — MELHORES OPÇÕES POR DESTINO</div>
+
+  <div class="totais">
+    <div class="tot-card">
+      <div class="tot-label">Europa (baixa temp.)</div>
+      <div class="tot-val">R$ 14.288</div>
+      <div class="tot-sub">Iberia via Livelo 486k pts</div>
+    </div>
+    <div class="tot-card">
+      <div class="tot-label">Europa (alta temp.)</div>
+      <div class="tot-val">R$ 20.815</div>
+      <div class="tot-sub">Iberia via Livelo 708k pts</div>
+    </div>
+    <div class="tot-card">
+      <div class="tot-label">EUA (JFK/MIA)</div>
+      <div class="tot-val">R$ 27.254</div>
+      <div class="tot-sub">LATAM via Qatar PC / Livelo 927k pts</div>
+    </div>
+    <div class="tot-card">
+      <div class="tot-label">Canadá (YYZ)</div>
+      <div class="tot-val">R$ 23.692</div>
+      <div class="tot-sub">Aeroplan compra direta 360k pts (promo 100%)</div>
+    </div>
+    <div class="tot-card">
+      <div class="tot-label">Maldivas</div>
+      <div class="tot-val">R$ 29.988</div>
+      <div class="tot-sub">Qatar PC via Livelo 1.020k pts</div>
+    </div>
+    <div class="tot-card">
+      <div class="tot-label">Japão</div>
+      <div class="tot-val">R$ 35.280</div>
+      <div class="tot-sub">Qatar PC via Livelo 1.200k pts</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Estratégia de compra:</strong> Para Europa e EUA, concentrar a compra em Livelo Clube (R$29,40/mil) e transferir para Avios via Iberia Plus ou Qatar PC (paridade 2:1). Para Maldivas e Japão, o mesmo caminho via Qatar PC. Para Canadá/EUA com Aeroplan, aguardar promo de 100% bônus no site da Air Canada.<br><br>
+    <strong>Volume de pontos por ano — estimativa para 2 viagens:</strong> Europa (baixa) = 486k + EUA = 927k = <strong>~1.413.000 pts Livelo</strong>. Com Turbo Livelo plano Super (400k/dia), isso requer ~4 janelas de promoção 58% off — planejável com 3-4 meses de antecedência.<br><br>
+    <strong>Disponibilidade para 3 pax:</strong> Qatar e Iberia normalmente liberam 2 assentos award por voo. Para 3 pax pode ser necessário dividir em voos adjacentes ou datas diferentes. Iberia garante disponibilidade desde abertura das vendas (12 meses antes). Qatar: 360 dias para titulares do Privilege Club, 330 para programas parceiros.
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>British Airways GRU→LHR: evitar.</strong> 110.000 Avios/pax/trecho = custo 2,7× maior que Iberia para o mesmo destino (Europa), usando os mesmos Avios. Adiciona taxa de combustível elevada. Só faz sentido para quem quer especificamente pousar em Londres.
+  </div>
+</div>
+
+<div style="font-size:10px;color:var(--txt3);margin-top:20px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)">
+  Altavela · Comparativo de emissões jul/2026 · Valores de referência, sujeitos a disponibilidade e variação cambial. Confirmar disponibilidade award antes de comprar pontos.
+</div>
+
+</body>
+</html>

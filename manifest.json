@@ -1,0 +1,25 @@
+{
+  "name": "Altavela · Milhas",
+  "short_name": "Altavela",
+  "description": "Calculadora de milhas para emissões Business e First Class",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0f1e",
+  "theme_color": "#0a0f1e",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230a0f1e' rx='40'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='110' font-family='Georgia,serif' fill='%23c9a227'%3EA%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "categories": [
+    "travel",
+    "finance",
+    "utilities"
+  ]
+}
