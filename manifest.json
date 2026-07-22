@@ -1,25 +1,92 @@
 {
-  "name": "Altavela · Milhas",
-  "short_name": "Altavela",
-  "description": "Calculadora de milhas para emissões Business e First Class",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0a0f1e",
-  "theme_color": "#0a0f1e",
-  "orientation": "portrait-primary",
-  "lang": "pt-BR",
-  "icons": [
+  "_meta": {
+    "versao": "2026-07-22",
+    "descricao": "Dados de promoções e CPM — atualizar este arquivo para atualizar o app",
+    "proxima_atualizacao": "diária"
+  },
+  "cambio": {
+    "usd": 5.88,
+    "cad": 4.31,
+    "aud": 3.73,
+    "iof": 0.0438
+  },
+  "cpm_base": {
+    "livelo_clube": 29.4,
+    "livelo_sem_clube": 42.0,
+    "esfera_clube": 33.6,
+    "esfera_sem_clube": 42.0,
+    "_nota": "CPM em R$/mil pontos em promoções recorrentes"
+  },
+  "paridades": {
+    "esfera_fb_clube": 3.0,
+    "esfera_fb_sem_clube": 3.5,
+    "livelo_fb_clube": 3.5,
+    "livelo_fb_sem_clube": 3.5,
+    "esfera_avios": 2.0,
+    "livelo_avios": 2.0
+  },
+  "bonus_ativos": {
+    "livelo_smiles": 0,
+    "livelo_latam": 0,
+    "livelo_azul": 0,
+    "esfera_smiles": 0,
+    "esfera_azul": 0,
+    "esfera_latam": 0,
+    "atmos_bonus": 0,
+    "aa_desconto": 30
+  },
+  "promos": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230a0f1e' rx='40'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='110' font-family='Georgia,serif' fill='%23c9a227'%3EA%3C/text%3E%3C/svg%3E",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "id": "fb_promo_rewards_jul",
+      "programa": "Flying Blue Promo Rewards",
+      "descricao": "25% off Business EUA→Europa (JFK→Europa 45k). GRU→Europa sem desconto.",
+      "valor": "25% off",
+      "cpm_efetivo": null,
+      "expira": "31/07/2026",
+      "expira_hora": null,
+      "urgencia": "media",
+      "cor": "amb",
+      "emoji": "⚠️",
+      "acao": "flyingblue.com — válido apenas rotas EUA→Europa, não GRU",
+      "fonte": "flyingblue.com"
+    },
+    {
+      "id": "livelo_hilton_50",
+      "programa": "Livelo→Hilton Honors",
+      "descricao": "50% bônus transferência (paridade 2:1) — irrelevante para aéreo",
+      "valor": "50%",
+      "cpm_efetivo": null,
+      "expira": "31/07/2026",
+      "expira_hora": null,
+      "urgencia": "baixa",
+      "cor": "txt2",
+      "emoji": "🏨",
+      "acao": "livelo.com.br → Transferir → Hilton",
+      "fonte": "passageirodeprimeira.com"
     }
   ],
-  "screenshots": [],
-  "categories": [
-    "travel",
-    "finance",
-    "utilities"
-  ]
+  "encerraram": [
+    {
+      "programa": "Esfera→Smiles 80% bônus",
+      "encerrou": "18/07"
+    },
+    {
+      "programa": "Esfera→ConnectMiles 55%",
+      "encerrou": "20/07"
+    },
+    {
+      "programa": "Smiles 375% compra direta",
+      "encerrou": "17/07"
+    },
+    {
+      "programa": "Esfera→Azul bônus",
+      "encerrou": "17/07"
+    },
+    {
+      "programa": "Livelo→LATAM 25%",
+      "encerrou": "30/06"
+    }
+  ],
+  "data_verificacao": "22/07/2026",
+  "hora_verificacao": "08h00"
 }
